@@ -12,11 +12,11 @@ INSERT INTO clothing_store VALUES (7, "sweatshirt", 62.95, "outerwear", 426);
 INSERT INTO clothing_store VALUES (8, "chinos", 54.99, "pants", 161);
 INSERT INTO clothing_store VALUES (9, "jacket", 179.99, "outerwear", 319);
 INSERT INTO clothing_store VALUES (10, "baseball cap", 31.99, "accessories", 148);
-INSERT INTO clothing_store VALUES (10, "graphic t-shirt", 27.50, "shirts", 298);
-INSERT INTO clothing_store VALUES (10, "dress pants", 72.95, "pants", 188);
-INSERT INTO clothing_store VALUES (10, "rings", 62.95, "accessories", 231);
-INSERT INTO clothing_store VALUES (10, "beanie", 34.99, "accessories", 112);
-INSERT INTO clothing_store VALUES (10, "derby shoe", 209.99, "shoes", 124);
+INSERT INTO clothing_store VALUES (11, "graphic t-shirt", 27.50, "shirts", 298);
+INSERT INTO clothing_store VALUES (12, "dress pants", 72.95, "pants", 188);
+INSERT INTO clothing_store VALUES (13, "rings", 62.95, "accessories", 231);
+INSERT INTO clothing_store VALUES (14, "beanie", 34.99, "accessories", 112);
+INSERT INTO clothing_store VALUES (15, "derby shoe", 209.99, "shoes", 124);
 
 --display the database in order by price.
 SELECT * FROM clothing_store
