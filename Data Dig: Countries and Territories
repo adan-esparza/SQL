@@ -1,0 +1,45 @@
+ /* 
+ This Query is a data dig on Countries and dependent territories, this data is pulled from 2020.
+ Data adapted from;
+ http://www.worldometers.info/world-population/population-by-country/
+ Does not include rows which had "N.A." values, so some territories are missing.
+ */
+ 
+SELECT * FROM countries;
+
+--What is the average population across all countries & territories?
+SELECT AVG(population) FROM countries;
+
+-- What country or territory has the highest median age?
+SELECT name, MAX(median_age) FROM countries;
+
+-- What country or territory has the smallest land area?
+SELECT name, MIN(area_sq_km) FROM countries;
+
+-- What countries have a median age under 18? What is the average population size for each country?
+SELECT name, median_age, AVG(population) FROM countries GROUP BY name HAVING median_age < 18;  
+
+-- What country has the lowest population change?
+SELECT name, MIN(population_change) FROM countries;
+
+-- What country has the largest population change?
+SELECT name, MAX(population_change) FROM countries;
+
+-- For all countries and territories, what is the average population change?
+SELECT AVG(population_change) FROM countries;
+
+-- How many countries have experienced positive or negative population growth? How many countries fall into each category?
+SELECT COUNT(*) AS Number_of_Countries, CASE
+    
+    WHEN population_change > 1000000 THEN "Extreme Growth"
+    WHEN population_change > 500000 THEN "High Growth"
+    WHEN population_change > 200000 THEN "Average Growth"
+    WHEN population_change > 1 THEN "Small Growth"
+    ELSE "Negative Growth"
+    END "Country Growth"
+    
+    FROM countries
+    GROUP BY "Country Growth";
+    
+-- What countries have a population of over 100 million or make up more than 2% of the population?
+SELECT name, population, median_age ,percent_of_world_pop  FROM countries WHERE population > 100000000 OR percent_of_world_pop > 2.0 ORDER BY population desc;
