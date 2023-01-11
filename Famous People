@@ -1,0 +1,83 @@
+/* This I created a table and utilized JOIN commmands to conduct an analysis on various famous people
+and their professions */
+
+/*Create a table about famous people and what they do */
+
+CREATE TABLE people (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT, age INTEGER,
+profession TEXT);
+
+INSERT INTO people (name, profession, age) VALUES ("Dijon", "singer", 30);
+INSERT INTO people (name, profession, age) VALUES ("Imogen Heap", "singer", 45);
+INSERT INTO people (name, profession, age) VALUES ("Sade", "singer", 63);
+INSERT INTO people (name, profession, age) VALUES ("Denzel Washington", "actor", 68);
+INSERT INTO people (name, profession, age) VALUES ("Miles Teller", "actor", 35);
+INSERT INTO people (name, profession, age) VALUES ("Chirstian Bale", "actor", 48);
+INSERT INTO people (name, profession, age) VALUES ("Heath Ledger", "actor", 28);
+INSERT INTO people (name, profession, age) VALUES ("Franz Kafka", "author", 40);
+INSERT INTO people (name, profession, age) VALUES ("Tracey Hook", "author", 58);
+INSERT INTO people (name, profession, age) VALUES ("Neil Gaiman", "author", 62);
+
+CREATE TABLE movies (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+release INTEGER, actor_id INTEGER);
+
+INSERT INTO movies (name, release, actor_id) VALUES ("Flight", "2012", 4);
+INSERT INTO movies (name, release, actor_id) VALUES ("Whiplash", "2014", 5);
+INSERT INTO movies (name, release, actor_id) VALUES ("The Dark Knight", "2008", 6);
+INSERT INTO movies (name, release, actor_id) VALUES ("The Dark Knight", "2008", 7);
+
+CREATE TABLE songs (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+release INTEGER, artist_id INTEGER);
+
+INSERT INTO songs (name, release, artist_id) VALUES ("Skin", "2018", 1);
+INSERT INTO songs (name, release, artist_id) VALUES ("Just for Now", "2005", 2);
+INSERT INTO songs (name, release, artist_id) VALUES ("By Your Side", "2000", 3);
+
+CREATE TABLE books (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT, author_id INTEGER);
+INSERT INTO books (name, author_id) VALUES ("The Metamorphosis", 8);
+INSERT INTO books (name, author_id) VALUES ("Natural Elements", 9);
+INSERT INTO books (name, author_id) VALUES ("The Graveyard Book", 10);
+
+CREATE TABLE costar (
+id INTEGER PRIMARY KEY AUTOINCREMENT, person1_id INTEGER, person2_id INTEGER);
+
+INSERT INTO costar (person1_id, person2_id) VALUES (6, 7);
+
+-- Who are all of the celebrities? What are their professions? How old is each celebrity?
+SELECT name AS "Celebrity", profession AS "Profession", age AS "Age"
+FROM people
+ORDER BY age;
+
+-- For all musical artists, what songs have they made? What year did these songs release?
+SELECT songs.name AS "Song", people.name AS "Artist", songs.release AS "Release Date"
+FROM people
+JOIN songs
+ON people.id = songs.artist_id;
+
+-- For all actors, what movies have they been in? What year did these films release?
+SELECT movies.name AS "Movie", people.name AS "Actors", movies.release AS "Release Year" FROM
+people
+JOIN movies
+ON people.id = movies.actor_id
+ORDER BY movies.release DESC;
+
+-- For each author, what are the titles of their books?
+SELECT people.name AS "Author", books.name AS "Book Title"
+FROM people
+JOIN books
+ON people.id = books.author_id;
+
+-- Which actors are co-stars?
+SELECT a.name AS "Actor", b.name AS "Co-Star"
+FROM costar
+JOIN people a
+ON costar.person1_id = a.id
+JOIN people b
+ON costar.person2_id = b.id
